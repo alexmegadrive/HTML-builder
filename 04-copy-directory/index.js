@@ -15,6 +15,7 @@ let pathName = path.join(__dirname, 'files')
 let pathNew = path.join(__dirname, 'files-copy')
 
 copyFolder()
+
 async function copyFolder() {
     fs.mkdir(pathNew, { recursive: true }, err => {
         if(err) throw err; // не удалось создать папку
@@ -22,6 +23,7 @@ async function copyFolder() {
      });
 
      try {
+        await clearFolder(pathNew)
         const files = await readdir(pathName, {
         });
         for (const file of files) {
@@ -39,4 +41,16 @@ async function copyFolder() {
 
 }
 
+
+async function clearFolder(path) {
+    fs.readdir(path, (err, items) => {
+        if(err) throw err;
+        for (let i=0; i<items.length; i++) {
+            const file = path + '\\' + items[i];
+            (file => fs.unlink(file, err => {
+                if(err) throw err;
+            }))(file);
+        }
+    });
+}
 
