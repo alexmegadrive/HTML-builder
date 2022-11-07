@@ -139,15 +139,9 @@ async function parseHtmlComponents() {
     return COMPONENTS_CONTENT
 }
 
-// async function buildAssets() {
-//     fs.mkdir(assetsDistPath, { recursive: true }, err => {
-//         if(err) throw err; // не удалось создать папку
-//         console.log('папка создана');
-//      });
-// }
+
 
 async function copyDir(src, dest) {
-    // await clearFolder(assetsDistPath)
     await fsPromises.mkdir(dest, {
         recursive: true
     });
